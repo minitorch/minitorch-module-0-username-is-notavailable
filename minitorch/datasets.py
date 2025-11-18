@@ -4,7 +4,18 @@ from dataclasses import dataclass
 from typing import List, Tuple
 
 
-def make_pts(N):
+def make_pts(N: int) -> List[Tuple[float, float]]:
+    """Generates points.
+
+    Args:
+    ----
+        N: Number of points.
+
+    Return:
+    ------
+        A list of points generated.
+
+    """
     X = []
     for i in range(N):
         x_1 = random.random()
@@ -20,7 +31,18 @@ class Graph:
     y: List[int]
 
 
-def simple(N):
+def simple(N: int) -> Graph:
+    """Generates a graph which left points are red and others blue.
+
+    Args:
+    ----
+        N: number of points.
+
+    Return:
+    ------
+        A class Graph which left points are red and others blue.s
+
+    """
     X = make_pts(N)
     y = []
     for x_1, x_2 in X:
@@ -29,7 +51,18 @@ def simple(N):
     return Graph(N, X, y)
 
 
-def diag(N):
+def diag(N: int) -> Graph:
+    """Generates a graph which points below the diagonal are red and others blue.
+
+    Args:
+    ----
+        N: number of points.
+
+    Return:
+    ------
+        A class Graph which points below the diagonal are red and others blue.
+
+    """
     X = make_pts(N)
     y = []
     for x_1, x_2 in X:
@@ -38,7 +71,18 @@ def diag(N):
     return Graph(N, X, y)
 
 
-def split(N):
+def split(N: int) -> Graph:
+    """Generates a graph which points in the middle are blue and others red.
+
+    Args:
+    ----
+        N: number of points.
+
+    Return:
+    ------
+        A class Graph which points in the middle are blue and others red.
+
+    """
     X = make_pts(N)
     y = []
     for x_1, x_2 in X:
@@ -47,7 +91,18 @@ def split(N):
     return Graph(N, X, y)
 
 
-def xor(N):
+def xor(N: int) -> Graph:
+    """Generates a graph which points in an XOR pattern are red and others blue.
+
+    Args:
+    ----
+        N: number of points.
+
+    Return:
+    ------
+        A class Graph which points in an XOR pattern are red and others blue.
+
+    """
     X = make_pts(N)
     y = []
     for x_1, x_2 in X:
@@ -56,7 +111,18 @@ def xor(N):
     return Graph(N, X, y)
 
 
-def circle(N):
+def circle(N: int) -> Graph:
+    """Generates a graph which points inside a circle are blue and others red.
+
+    Args:
+    ----
+        N: number of points.
+
+    Return:
+    ------
+        A class Graph which points inside a circle are blue and others red.
+
+    """
     X = make_pts(N)
     y = []
     for x_1, x_2 in X:
@@ -66,20 +132,56 @@ def circle(N):
     return Graph(N, X, y)
 
 
-def spiral(N):
+def spiral(N: int) -> Graph:
+    """Generates a graph which points in a spiral pattern are red blue.
 
-    def x(t):
+    Args:
+    ----
+        N: number of points.
+
+    Return:
+    ------
+        A class Graph which points in a spiral pattern are red blue.
+
+    """
+
+    def x(t: float) -> float:
+        """Compute the x coordinate of a spiral at time t.
+
+        Args:
+        ----
+            t: time parameter.
+
+        """
         return t * math.cos(t) / 20.0
 
-    def y(t):
+    def y(t: float) -> float:
+        """Compute the y coordinate of a spiral at time t.
+
+        Args:
+        ----
+            t: time parameter.
+
+        """
         return t * math.sin(t) / 20.0
-    X = [(x(10.0 * (float(i) / (N // 2))) + 0.5, y(10.0 * (float(i) / (N //
-        2))) + 0.5) for i in range(5 + 0, 5 + N // 2)]
-    X = X + [(y(-10.0 * (float(i) / (N // 2))) + 0.5, x(-10.0 * (float(i) /
-        (N // 2))) + 0.5) for i in range(5 + 0, 5 + N // 2)]
+
+    X = [
+        (x(10.0 * (float(i) / (N // 2))) + 0.5, y(10.0 * (float(i) / (N // 2))) + 0.5)
+        for i in range(5 + 0, 5 + N // 2)
+    ]
+    X = X + [
+        (y(-10.0 * (float(i) / (N // 2))) + 0.5, x(-10.0 * (float(i) / (N // 2))) + 0.5)
+        for i in range(5 + 0, 5 + N // 2)
+    ]
     y2 = [0] * (N // 2) + [1] * (N // 2)
     return Graph(N, X, y2)
 
 
-datasets = {'Simple': simple, 'Diag': diag, 'Split': split, 'Xor': xor,
-    'Circle': circle, 'Spiral': spiral}
+datasets = {
+    "Simple": simple,
+    "Diag": diag,
+    "Split": split,
+    "Xor": xor,
+    "Circle": circle,
+    "Spiral": spiral,
+}
